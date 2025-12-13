@@ -1,14 +1,34 @@
+# Python bytecode
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+# Virtual environments
 env/
 venv/
 ENV/
+
+# Build and distribution
 build/
 dist/
 *.egg-info/
+
+# IDEs
 .idea/
 .vscode/
+
+# OS-specific
 .DS_Store
-*.log   
+*.log
+
+# FastAPI-specific
+.env
+.env.local
+.env.production
+.env.test
+
+# Optional: Testing and coverage (if using pytest/coverage)
+.coverage
+.pytest_cache/
+htmlcov/
