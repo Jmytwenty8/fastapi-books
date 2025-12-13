@@ -6,7 +6,7 @@ from services.book_service import BookService
 book_router = APIRouter()
 
 
-@book_router.get("/books", response_model=ResponseModel, status_code=status.HTTP_200_OK)
+@book_router.get("/", response_model=ResponseModel, status_code=status.HTTP_200_OK)
 async def get_books(book_service: BookService = Depends()) -> ResponseModel:
     books = book_service.get_books()
     return ResponseModel(
@@ -17,7 +17,7 @@ async def get_books(book_service: BookService = Depends()) -> ResponseModel:
 
 
 @book_router.post(
-    "/books", response_model=ResponseModel, status_code=status.HTTP_201_CREATED
+    "/", response_model=ResponseModel, status_code=status.HTTP_201_CREATED
 )
 async def add_book(book: Book, book_service: BookService = Depends()) -> ResponseModel:
     new_book = book_service.add_book(book)
@@ -27,7 +27,7 @@ async def add_book(book: Book, book_service: BookService = Depends()) -> Respons
 
 
 @book_router.get(
-    "/books/{book_id}", response_model=ResponseModel, status_code=status.HTTP_200_OK
+    "/{book_id}", response_model=ResponseModel, status_code=status.HTTP_200_OK
 )
 async def get_book(
     book_id: int, book_service: BookService = Depends()
@@ -43,7 +43,7 @@ async def get_book(
 
 
 @book_router.patch(
-    "/books/{book_id}", response_model=ResponseModel, status_code=status.HTTP_200_OK
+    "/{book_id}", response_model=ResponseModel, status_code=status.HTTP_200_OK
 )
 async def update_book(
     book_id: int, book: BookUpdate, book_service: BookService = Depends()
@@ -59,7 +59,7 @@ async def update_book(
 
 
 @book_router.delete(
-    "/books/{book_id}", response_model=ResponseModel, status_code=status.HTTP_200_OK
+    "/{book_id}", response_model=ResponseModel, status_code=status.HTTP_200_OK
 )
 async def delete_book(
     book_id: int, book_service: BookService = Depends()

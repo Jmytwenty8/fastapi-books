@@ -3,4 +3,4 @@ from fastapi import APIRouter
 
 router = APIRouter()
 
-router.include_router(book_router)
+router.include_router(book_router, prefix="/books", tags=["Books"])
