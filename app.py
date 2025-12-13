@@ -3,7 +3,7 @@ from fastapi import (
 )
 from models.response_schema import APIError
 from routes import router
-from handlers.exception_handler import api_error_handler
+from utils.exception_handler import api_error_handler
 
 app = FastAPI()
 
