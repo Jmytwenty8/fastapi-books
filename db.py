@@ -1,47 +1,18 @@
-books_db = [
-    {
-        "id": 1,
-        "title": "1984",
-        "author": "George Orwell",
-        "publisher": "Secker & Warburg",
-        "published_date": "1949-06-08",
-        "page_count": 328,
-        "language": "English",
-    },
-    {
-        "id": 2,
-        "title": "To Kill a Mockingbird",
-        "author": "Harper Lee",
-        "publisher": "J.B. Lippincott & Co.",
-        "published_date": "1960-07-11",
-        "page_count": 281,
-        "language": "English",
-    },
-    {
-        "id": 3,
-        "title": "The Great Gatsby",
-        "author": "F. Scott Fitzgerald",
-        "publisher": "Charles Scribner's Sons",
-        "published_date": "1925-04-10",
-        "page_count": 180,
-        "language": "English",
-    },
-    {
-        "id": 4,
-        "title": "One Hundred Years of Solitude",
-        "author": "Gabriel García Márquez",
-        "publisher": "Harper & Row",
-        "published_date": "1970-06-05",
-        "page_count": 417,
-        "language": "Spanish",
-    },
-    {
-        "id": 5,
-        "title": "Pride and Prejudice",
-        "author": "Jane Austen",
-        "publisher": "T. Egerton, Whitehall",
-        "published_date": "1813-01-28",
-        "page_count": 279,
-        "language": "English",
-    },
-]
+from sqlalchemy.ext.asyncio import create_async_engine
+from sqlmodel import SQLModel
+from config import Config
+
+
+engine = create_async_engine(url=Config.DATABASE_URL, echo=True)
+
+
+async def init_db():
+    async with engine.begin() as conn:
+        await conn.run_sync(SQLModel.metadata.create_all)
+
+
+async def get_session():
+    from sqlmodel.ext.asyncio.session import AsyncSession
+
+    async with AsyncSession(engine) as session:
+        yield session
